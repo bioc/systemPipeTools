@@ -1,4 +1,4 @@
-library(SPtools)
+library(systemPipeTools)
 # context("showDT")
 test_that("check class", {
     x <- showDT(iris)
