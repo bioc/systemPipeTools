@@ -1,5 +1,5 @@
-title: SPtools
-url: https://systempipe.org/SPtools/
+title: systemPipeTools
+url: https://systempipe.org/systemPipeTools/
 authors:
    Daniela Cassol:
      href: https://www.dcassol.com/
@@ -12,13 +12,13 @@ authors:
 home:
   links:
   - text: Download from GitHub
-    href: https://github.com/systemPipeR/SPtools
-  - text: Ask a question about SPtools
+    href: https://github.com/systemPipeR/systemPipeTools
+  - text: Ask a question about systemPipeTools
     href: https://support.bioconductor.org/
   - text: Report a bug
-    href: https://github.com/systemPipeR/SPtools/issues
+    href: https://github.com/systemPipeR/systemPipeTools/issues
 reference:
-  - title: SPtools Manual Reference
+  - title: systemPipeTools Manual Reference
   - subtitle: Data Visualization 
     contents:
       - exploreDDSplot

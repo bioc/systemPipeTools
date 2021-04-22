@@ -1,4 +1,4 @@
-Package: SPtools
+Package: systemPipeTools
 Title: Tools for data visualization
 Version: 0.9.1
 Date: 2021-04-20
@@ -7,7 +7,7 @@ Authors@R: c(
     person(given = "Ponmathi", family = "Ramasamy", role = c("aut"), email = "prama008@ucr.edu"),
     person(given = "Le", family = "Zhang", role = c("aut"), email = "le.zhang001@email.ucr.edu"),
     person(given = "Thomas", family = "Girke", role = c("aut"), email = "thomas.girke@ucr.edu"))
-Description: The SPtools package provides a set of utilities for High Throughput Sequence Data Visualization. This package is designed to extend and provide a visualization and utilities interface for the systemPipeR package.   
+Description: The systemPipeTools package provides a set of utilities for High Throughput Sequence Data Visualization. This package is designed to extend and provide a visualization and utilities interface for the systemPipeR package.   
 Imports: 
 	DESeq2,
 	GGally,

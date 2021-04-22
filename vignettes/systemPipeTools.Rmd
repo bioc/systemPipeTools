@@ -1,5 +1,5 @@
 ---
-title: "SPtools: Data Visualizations" 
+title: "systemPipeTools: Data Visualizations" 
 author: "Author: Daniela Cassol (danielac@ucr.edu) and Thomas Girke (thomas.girke@ucr.edu)"
 date: "Last update: `r format(Sys.time(), '%d %B, %Y')`" 
 output:
@@ -7,10 +7,10 @@ output:
     toc_float: true
     code_folding: show
   BiocStyle::pdf_document: default
-package: SPtools
+package: systemPipeTools
 vignette: |
   %\VignetteEncoding{UTF-8}
-  %\VignetteIndexEntry{SPtools: Data Visualizations}
+  %\VignetteIndexEntry{systemPipeTools: Data Visualizations}
   %\VignetteEngine{knitr::rmarkdown}
 fontsize: 14pt
 bibliography: bibtex.bib
@@ -38,20 +38,23 @@ knitr::opts_chunk$set(
 
 ```{r setup, echo=FALSE, messages=FALSE, warnings=FALSE, eval=TRUE}
 suppressPackageStartupMessages({
-    library(SPtools)
+    library(systemPipeTools)
   library(systemPipeR)
 })
 ```
 
 # Data Visualization with `systemPipeR`
 
-*SPtools* package extends the widely used *systemPipeR* (SPR) workflow environment 
-with enhanced tools kit for data visualization, including utilities to automate 
-the analysis of differentially expressed genes (DEGs).
-*SPtools* provides functions for data transformation and data exploration via 
+*systemPipeTools* package extends the widely used *[systemPipeR](https://systempipe.org/)* (SPR) [@H_Backman2016-bt]
+workflow environment with enhanced toolkit for data visualization, 
+including utilities to automate the analysis of differentially expressed genes (DEGs).
+*systemPipeTools* provides functions for data transformation and data exploration via 
 scatterplots, hierarchical clustering heatMaps, principal component analysis, 
-multidimensional scaling, generalized principal components, MA plots, volcano plot, 
-and t-Distributed Stochastic Neighbor embedding (t-SNE). 
+multidimensional scaling, generalized principal components, t-Distributed 
+Stochastic Neighbor embedding (t-SNE), and MA and volcano plots. 
+All these utilities can be integrated with the modular design of the *systemPipeR* 
+environment that allows users to easily substitute any of these features and/or 
+custom with alternatives.  
 
 ## Metadata and Reads Counting Information
 
@@ -76,11 +79,13 @@ For gene differential expression, raw counts are required, however for data
 visualization or clustering, it can be useful to work with transformed count data. 
 `exploreDDS` function is convenience wrapper to transform raw read counts using the 
 [`DESeq2`](@Love2014-sh) package transformations methods. The input file
-has to contain all the genes, not just differentially expressed ones. 
+has to contain all the genes, not just differentially expressed ones. Supported
+methods include variance stabilizing transformation (`vst`) (@Anders2010-tp), and 
+regularized-logarithm transformation or `rlog` (@Love2014-sh). 
 
 ```{r exploreDDS, eval=TRUE, warning=FALSE}
-exploredds <- exploreDDS(countMatrix, targets, cmp=cmp[[1]], preFilter=NULL, 
-                         transformationMethod="rlog")
+exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, 
+                         transformationMethod = "rlog")
 exploredds
 ```
 
@@ -100,14 +105,14 @@ exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL,
 
 The scatterplots are created using the log2 transform normalized reads count, 
 variance stabilizing transformation (VST) (@Anders2010-tp), and 
-egularized-logarithm transformation or `rlog` (@Love2014-sh). 
+regularized-logarithm transformation or `rlog` (@Love2014-sh). 
 
 ## Hierarchical Clustering Dendrogram 
 
 The following computes the sample-wise correlation coefficients using the `stats::cor()`
 function from the transformed expression values. After transformation to a
 distance matrix, hierarchical clustering is performed with the `stats::hclust`
-function and theresult is plotted as a dendrogram, as follows:
+function and the result is plotted as a dendrogram, as follows:
 
 ```{r hclustplot, eval=TRUE}
 hclustplot(exploredds, method = "spearman")
@@ -117,8 +122,8 @@ The function provides the utility to save the plot automatically.
 
 ## Hierarchical Clustering HeatMap 
 
-This function performs hierarchical clustering on the transformed expression matrix
-generated within the `DESeq2` package. It uses, by default, a `Pearson` 
+This function performs hierarchical clustering on the transformed expression 
+matrix generated within the `DESeq2` package. It uses, by default, a `Pearson` 
 correlation-based distance measure and complete linkage for cluster join.
 If `samples` selected in the `clust` argument, it will be applied the `stats::dist()`
 function to the transformed count matrix to get sample-to-sample distances. Also, 
@@ -199,7 +204,7 @@ The function provides the utility to save the plot automatically.
 
 This function computes and plots t-Distributed Stochastic Neighbor embedding (t-SNE) 
 analysis for unsupervised nonlinear dimensionality reduction of count expression 
-matrix. Internally, it is applied the `Rtsne::Rtsne()` function, using the exact 
+matrix. Internally, it is applied the `Rtsne::Rtsne()` [@Rtsne] function, using the exact 
 t-SNE computing with `theta=0.0`.
 
 ```{r tSNEplot, eval=TRUE}

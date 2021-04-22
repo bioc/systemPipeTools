@@ -1,4 +1,4 @@
 library(testthat)
-library(SPtools)
+library(systemPipeTools)
 
-test_check("SPtools")
+test_check("systemPipeTools")
