@@ -1,1 +1,4 @@
 .Rproj.user
+vignettes/*_cache
+vignettes/*.html
+vignettes/*_files

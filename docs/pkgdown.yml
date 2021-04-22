@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   systemPipeTools: systemPipeTools.html
-last_built: 2021-04-22T19:35Z
+last_built: 2021-04-22T21:26Z
 urls:
   reference: https://systempipe.org/systemPipeTools//reference
   article: https://systempipe.org/systemPipeTools//articles
