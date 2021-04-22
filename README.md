@@ -1,4 +1,4 @@
-# systemPipeTools: Tools for data visualization
+# systemPipeTools
 
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/systemPipeR/systemPipeTools/workflows/R-CMD-check/badge.svg)
