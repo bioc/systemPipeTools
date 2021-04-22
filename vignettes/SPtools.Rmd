@@ -70,7 +70,7 @@ visualization or clustering, it can be useful to work with transformed count dat
 [`DESeq2`](@Love2014-sh) package transformations methods. The input file
 has to contain all the genes, not just differentially expressed ones. 
 
-```{r exploreDDS, eval=TRUE}
+```{r exploreDDS, eval=TRUE, warning=FALSE}
 exploredds <- exploreDDS(countMatrix, targets, cmp=cmp[[1]], preFilter=NULL, 
                          transformationMethod="rlog")
 exploredds
@@ -85,9 +85,9 @@ sets with more complex experimental designs.
 To decide which transformation to choose, we can visualize the transformation effect 
 comparing two samples or a grid of all samples, as follows:
 
-```{r exploreDDSplot, eval=TRUE}
+```{r exploreDDSplot, eval=TRUE, warning=FALSE}
 exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, 
-               samples = c("M12A", "A12A"), scattermatrix = FALSE)
+               # samples = c("M12A", "A12A"), scattermatrix = FALSE)
 exploreDDSplot(countMatrix, targets,
   cmp = cmp[[1]], preFilter = NULL,
   samples = c("M12A", "M12A", "A12A", "A12A"), scattermatrix = TRUE)
@@ -129,7 +129,7 @@ heatMaplot(exploredds, clust = "samples", plotly = TRUE)
 If `ind` selected in the `clust` argument, it is necessary to provide the list of
 differentially expressed genes for the `exploredds` subset.
 
-```{r heatMaplot_DEG, eval=TRUE}
+```{r heatMaplot_DEG, eval=TRUE, warning=FALSE}
 ## Individuals genes identified in DEG analysis
 ### DEG analysis with `systemPipeR`
 degseqDF <- systemPipeR::run_DESeq2(countDF = countMatrix, targets = targets, 
@@ -173,7 +173,7 @@ The function provides the utility to save the plot automatically.
 This function computes and plots generalized principal components analysis for 
 dimension reduction of count expression matrix.
 
-```{r GLMplot, eval=TRUE}
+```{r GLMplot, eval=TRUE, warning=FALSE}
 exploredds_r <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
                          preFilter = NULL, transformationMethod = "raw")
 GLMplot(exploredds_r, plotly = FALSE)
