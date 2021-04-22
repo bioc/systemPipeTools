@@ -1,0 +1,9 @@
+bibentry(bibtype="manual",
+	title = "SPtools: Tools for data visualization",
+        author = personList(
+            as.person(c("Daniela Cassol", "Ponmathi Ramasamy", "Le Zhang", "Thomas Girke")),
+        year = format(Sys.Date(), "%Y"),
+        url = "http://www.bioconductor.org/packages/SPtools",
+        note = {R package version 0.9.1}
+)
+

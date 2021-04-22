@@ -1,0 +1,9 @@
+CHANGES IN VERSION 0.99.1
+-------------------------
+
+NEW FEATURES
+
+The following enhancements have been added to SPtools:
+	- Package submit to Bioconductor!
+	- Added `GLMplot`, `MAplot`, `MDSplot`, `PCAplot`,  `exploreDDSplot`, `hclustplot`, `heatMaplot`, `tSNEplot`, and `volcanoplot` functions.
+	- Added `exploreDDS` function to transform raw read counts using the `DESeq2::DESeq2-package()` package transformations methods.

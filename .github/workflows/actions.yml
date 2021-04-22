@@ -58,6 +58,12 @@ jobs:
         run: |
           sudo apt-get install libcurl4-openssl-dev
           sudo apt-get install libv8-dev
+      - name: Install system dependencies
+        if: matrix.config.os == 'macOS-latest'
+        run: |
+          ## Enable installing XML from source if needed
+          brew install libxml2
+          brew install librsvg
 
       - name: Install dependencies
         run: |

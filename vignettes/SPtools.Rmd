@@ -45,6 +45,14 @@ suppressPackageStartupMessages({
 
 # Data Visualization with `systemPipeR`
 
+*SPtools* package extends the widely used *systemPipeR* (SPR) workflow environment 
+with enhanced tools kit for data visualization, including utilities to automate 
+the analysis of differentially expressed genes (DEGs).
+*SPtools* provides functions for data transformation and data exploration via 
+scatterplots, hierarchical clustering heatMaps, principal component analysis, 
+multidimensional scaling, generalized principal components, MA plots, volcano plot, 
+and t-Distributed Stochastic Neighbor embedding (t-SNE). 
+
 ## Metadata and Reads Counting Information
 
 The first step is importing the `targets` file and raw reads counting table. 

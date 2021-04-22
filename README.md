@@ -9,13 +9,20 @@
 
 The SPtools package provides a set of utilities for High Throughput Sequence Data
 Visualization. This package is designed to extend and provide a visualization
-and utilities interface for the systemPipeR package. 
+and utilities interface for the `systemPipeR` package. 
 
 ### Installation
+
+Get the released version from Bioconductor:
+
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager") }
+BiocManager::install("SPtools"")
+```
+Or the development version from GitHub:
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager") }
 BiocManager::install("systemPipeR/SPtools"")
 ```
-
-### Usage
