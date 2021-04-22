@@ -86,11 +86,8 @@ To decide which transformation to choose, we can visualize the transformation ef
 comparing two samples or a grid of all samples, as follows:
 
 ```{r exploreDDSplot, eval=TRUE, warning=FALSE}
-exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, 
-               # samples = c("M12A", "A12A"), scattermatrix = FALSE)
-exploreDDSplot(countMatrix, targets,
-  cmp = cmp[[1]], preFilter = NULL,
-  samples = c("M12A", "M12A", "A12A", "A12A"), scattermatrix = TRUE)
+exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL,
+               samples = c("M12A", "M12A", "A12A", "A12A"), scattermatrix = TRUE)
 ```
 
 The scatterplots are created using the log2 transform normalized reads count, 
@@ -106,7 +103,6 @@ function and theresult is plotted as a dendrogram, as follows:
 
 ```{r hclustplot, eval=TRUE}
 hclustplot(exploredds, method = "spearman")
-hclustplot(exploredds, method = "spearman", savePlot = TRUE, filePlot = "cor.pdf")
 ```
 
 The function provides the utility to save the plot automatically. 
@@ -122,7 +118,6 @@ it is possible to generate the `pheatmap` or `plotly` plot format.
 
 ```{r heatMaplot_samples, eval=TRUE}
 ## Samples plot
-heatMaplot(exploredds, clust = "samples")
 heatMaplot(exploredds, clust = "samples", plotly = TRUE)
 ```
 
@@ -150,8 +145,7 @@ matrix. This plot shows samples variation based on the expression values and
 identifies batch effects.
 
 ```{r PCAplot, eval=TRUE}
-PCAplot(exploredds, plotly = TRUE)
-PCAplot(exploredds, save = TRUE, filePlot = "pca.pdf")
+PCAplot(exploredds, plotly = FALSE)
 ```
 
 The function provides the utility to save the plot automatically. 
@@ -163,7 +157,7 @@ reduction of count expression matrix. Internally, it is applied the `stats::dist
 function to the transformed count matrix to get sample-to-sample distances.
 
 ```{r MDSplot, eval=TRUE}
- MDSplot(exploredds, plotly = TRUE, save = TRUE, filePlot = "MDSplot.pdf")
+ MDSplot(exploredds, plotly = FALSE)
 ```
 
 The function provides the utility to save the plot automatically. 
@@ -177,7 +171,6 @@ dimension reduction of count expression matrix.
 exploredds_r <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
                          preFilter = NULL, transformationMethod = "raw")
 GLMplot(exploredds_r, plotly = FALSE)
-GLMplot(exploredds_r, plotly = FALSE, savePlot = TRUE, filePlot = "GLM.pdf")
 ```
 
 The function provides the utility to save the plot automatically. 
