@@ -1,1 +1,20 @@
-# SPtools
+# SPtools: Tools for data visualization
+
+<!-- badges: start -->
+![R-CMD-check](https://github.com/systemPipeR/SPtools/workflows/R-CMD-check/badge.svg)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+<!-- badges: end -->
+
+The SPtools package provides a set of utilities for High Throughput Sequence Data
+Visualization. This package is designed to extend and provide a visualization
+and utilities interface for the systemPipeR package. 
+
+### Installation
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager") }
+BiocManager::install("systemPipeR/SPtools"")
+```
+
+### Usage

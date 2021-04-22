@@ -1,0 +1,36 @@
+title: SPtools
+url: https://systempipe.org/SPtools/
+authors:
+   Daniela Cassol:
+     href: https://www.dcassol.com/
+   Ponmathi Ramasamy:
+     href: https://github.com/mathrj
+   Le Zhang:
+     href: https://lezhang.me/
+   Thomas Girke:
+     href: http://girke.bioinformatics.ucr.edu/
+home:
+  links:
+  - text: Download from GitHub
+    href: https://github.com/systemPipeR/SPtools
+  - text: Ask a question about SPtools
+    href: https://support.bioconductor.org/
+  - text: Report a bug
+    href: https://github.com/systemPipeR/SPtools/issues
+reference:
+  - title: SPtools Manual Reference
+  - subtitle: Data Visualization 
+    contents:
+      - exploreDDSplot()
+      - hclustplot()
+      - heatMaplot()
+      - PCAplot()
+      - MDSplot()
+      - GLMplot() 
+      - MAplot()
+      - tSNEplot() 
+      - volcanoplot()
+  - subtitle: Utilities
+    contents:
+      - exploreDDS() 
+      - showDT()
