@@ -21,16 +21,16 @@ reference:
   - title: SPtools Manual Reference
   - subtitle: Data Visualization 
     contents:
-      - exploreDDSplot()
-      - hclustplot()
-      - heatMaplot()
-      - PCAplot()
-      - MDSplot()
-      - GLMplot() 
-      - MAplot()
-      - tSNEplot() 
-      - volcanoplot()
+      - exploreDDSplot
+      - hclustplot
+      - heatMaplot
+      - PCAplot
+      - MDSplot
+      - GLMplot 
+      - MAplot
+      - tSNEplot 
+      - volcanoplot
   - subtitle: Utilities
     contents:
-      - exploreDDS() 
-      - showDT()
+      - exploreDDS 
+      - showDT
