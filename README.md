@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/systemPipeR/systemPipeTools/branch/master/graph/badge.svg?token=PwWVN6tTh3)](https://codecov.io/gh/systemPipeR/systemPipeTools)
 <!-- badges: end -->
 
-The systemPipeTools package provides a set of utilities for High Throughput Sequence Data
+`systemPipeTools` package provides a set of utilities for High Throughput Sequence Data
 Visualization. This package is designed to extend and provide a visualization
 and utilities interface for the `systemPipeR` package. 
 
