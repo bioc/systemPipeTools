@@ -26,9 +26,7 @@
 #' countMatrix <- read.delim(countMatrixPath, row.names = 1)
 #' ## Plot
 #' exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, transformationMethod = "rlog")
-#' PCAplot(exploredds, plotly = FALSE)
 #' PCAplot(exploredds, plotly = TRUE)
-#' PCAplot(exploredds, save = TRUE, filePlot = "pca.pdf")
 #' @export
 #' @importFrom DESeq2 DESeqTransform plotPCA
 #' @importFrom ggplot2 ggplot aes_string geom_point xlab ylab coord_fixed ggtitle ggsave

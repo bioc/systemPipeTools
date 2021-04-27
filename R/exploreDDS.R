@@ -41,9 +41,6 @@
 #' @return returns an object of class [DESeq2::DESeqTransform()].
 #'
 #' @examples
-#' suppressPackageStartupMessages({
-#'     library(systemPipeR)
-#' })
 #' ## Targets file
 #' targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
 #' targets <- read.delim(targetspath, comment = "#")

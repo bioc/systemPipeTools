@@ -33,7 +33,6 @@
 #' @return returns an object of `ggplot2 plot`.
 
 #' @examples
-#' library(systemPipeR)
 #' ## Targets file
 #' targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
 #' targets <- read.delim(targetspath, comment = "#")
@@ -51,6 +50,7 @@
 #'     cmp = cmp[[1]], preFilter = NULL,
 #'     samples = c(3, 4)
 #' )
+#' \dontrun{
 #' exploreDDSplot(countMatrix, targets,
 #'     cmp = cmp[[1]], samples = c("M1A", "M1B"), save = TRUE,
 #'     filePlot = "transf_deseq2.pdf"
@@ -60,6 +60,7 @@
 #'     cmp = cmp[[1]], preFilter = NULL,
 #'     samples = c("M1A", "M1B"), scattermatrix = TRUE
 #' )
+#' }
 #' @export exploreDDSplot
 #' @importFrom DESeq2 estimateSizeFactors counts
 #' @importFrom dplyr bind_rows as_tibble mutate group_by do

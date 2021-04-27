@@ -38,8 +38,6 @@
 #'     preFilter = NULL, transformationMethod = "rlog"
 #' )
 #' hclustplot(exploredds, method = "spearman")
-#' hclustplot(exploredds, method = "spearman", savePlot = TRUE, 
-#' filePlot = "cor.pdf")
 #' @export
 #' @importFrom ape as.phylo
 #' @importFrom ggplot2 coord_cartesian margin ggsave

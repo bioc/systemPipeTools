@@ -41,7 +41,6 @@
 #'     cmp = cmp[[1]],
 #'     preFilter = NULL, transformationMethod = "rlog"
 #' )
-#' heatMaplot(exploredds, clust = "samples")
 #' heatMaplot(exploredds, clust = "samples", plotly = TRUE)
 #' ## Individuals genes identified in DEG analysis
 #' ### DEG analysis with `systemPipeR`
@@ -57,10 +56,6 @@
 #' heatMaplot(exploredds,
 #'     clust = "ind",
 #'     DEGlist = unique(as.character(unlist(DEG_list[[1]])))
-#' )
-#' heatMaplot(exploredds,
-#'     clust = "ind",
-#'     DEGlist = unique(as.character(unlist(DEG_list[[1]]))), plotly = TRUE
 #' )
 #' @export
 #' @importFrom ggplot2 ggsave

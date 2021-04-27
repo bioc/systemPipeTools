@@ -60,7 +60,6 @@ Scatterplot of transformed counts from
 two samples or grid of all samples
 }
 \examples{
-library(systemPipeR)
 ## Targets file
 targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
 targets <- read.delim(targetspath, comment = "#")
@@ -78,6 +77,7 @@ exploreDDSplot(countMatrix, targets,
     cmp = cmp[[1]], preFilter = NULL,
     samples = c(3, 4)
 )
+\dontrun{
 exploreDDSplot(countMatrix, targets,
     cmp = cmp[[1]], samples = c("M1A", "M1B"), save = TRUE,
     filePlot = "transf_deseq2.pdf"
@@ -87,4 +87,5 @@ exploreDDSplot(countMatrix, targets,
     cmp = cmp[[1]], preFilter = NULL,
     samples = c("M1A", "M1B"), scattermatrix = TRUE
 )
+}
 }

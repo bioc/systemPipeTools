@@ -42,7 +42,6 @@
 #'     filter = c(Fold = 2, FDR = 10)
 #' )
 #' ## Plot
-#' volcanoplot(degseqDF, comparison = "M12-A12", filter = c(Fold = 2, FDR = 10))
 #' volcanoplot(degseqDF,
 #'     comparison = "M12-A12", filter = c(Fold = 1, FDR = 20),
 #'     genes = "ATCG00280"

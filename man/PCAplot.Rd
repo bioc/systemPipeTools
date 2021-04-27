@@ -36,7 +36,5 @@ countMatrixPath <- system.file("extdata", "countDFeByg.xls", package = "systemPi
 countMatrix <- read.delim(countMatrixPath, row.names = 1)
 ## Plot
 exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, transformationMethod = "rlog")
-PCAplot(exploredds, plotly = FALSE)
 PCAplot(exploredds, plotly = TRUE)
-PCAplot(exploredds, save = TRUE, filePlot = "pca.pdf")
 }

@@ -55,6 +55,4 @@ exploredds <- exploreDDS(countMatrix, targets,
     preFilter = NULL, transformationMethod = "rlog"
 )
 hclustplot(exploredds, method = "spearman")
-hclustplot(exploredds, method = "spearman", savePlot = TRUE, 
-filePlot = "cor.pdf")
 }
