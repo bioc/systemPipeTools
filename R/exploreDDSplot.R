@@ -80,14 +80,9 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
     if (is.numeric(samples)) {
         samples <- SampleName[samples]
         if (!all(samples %in% SampleName)) {
-            stop(paste("samples position can be
-                       assigned from the following options",
-                       paste0(1:length(SampleName),
-                              collapse = ", "
-                       ),
-                       sep = " "
-            ))
-        }
+            stop(paste("samples position can be assigned from the following options",
+                paste0(1:length(SampleName),
+                    collapse = ", "), sep = " "))}
     } else if (is.character(samples)) {
         if (all(samples == "ALL")) {
             samples <- SampleName
@@ -97,31 +92,25 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
         } else {
             samples <- SampleName[samples]
             if (!all(samples %in% SampleName)) {
-                stop(paste("samples names can be
-     assigned from the following
-     options",
-     paste0((SampleName),
-            collapse = ", "
-     ),
-     sep = " "
-                ))
-            }
+                stop(paste("samples names can be assigned from the following options",
+                    paste0((SampleName),
+                        collapse = ", "), sep = " "))}
         }
     }
     transformation <- . <- NULL
     ## Calculate the data transformations
     suppressWarnings({
         vst <- exploreDDS(countMatrix, targets,
-                          cmp = cmp, preFilter = preFilter,
-                          transformationMethod = "vst", blind = blind
+            cmp = cmp, preFilter = preFilter,
+            transformationMethod = "vst", blind = blind
         )
         rlog <- exploreDDS(countMatrix, targets,
-                           cmp = cmp, preFilter = preFilter,
-                           transformationMethod = "rlog", blind = blind
+            cmp = cmp, preFilter = preFilter,
+            transformationMethod = "rlog", blind = blind
         )
         dss <- exploreDDS(countMatrix, targets,
-                          cmp = cmp, preFilter = preFilter,
-                          transformationMethod = "raw"
+            cmp = cmp, preFilter = preFilter,
+            transformationMethod = "raw"
         )
         dss <- DESeq2::estimateSizeFactors(dss)
     })
@@ -137,8 +126,8 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
     ## plot
     if (scattermatrix == TRUE) {
         plot <- GGally::ggpairs(transform_df,
-                                title = "Scatterplot of transformed counts",
-                                ggplot2::aes_string(colour = "transformation")
+            title = "Scatterplot of transformed counts",
+            ggplot2::aes_string(colour = "transformation")
         )
     } else {
         plot <- ggplot2::ggplot(transform_df, ggplot2::aes(
@@ -159,10 +148,10 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
         plot <- transform_df %>%
             dplyr::group_by(transformation) %>%
             dplyr::do(p = plotly::plot_ly(.,
-                                          x = .data[[names[1]]], y = .data[[names[2]]], 
-                                          color = ~transformation, type = "scatter",
-                                          name = ~transformation, showlegend = TRUE, 
-                                          legendgroup = ~transformation
+                x = .data[[names[1]]], y = .data[[names[2]]],
+                color = ~transformation, type = "scatter",
+                name = ~transformation, showlegend = TRUE,
+                legendgroup = ~transformation
             )) %>%
             plotly::subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
     }

@@ -100,7 +100,8 @@ exploreDDS <- function(countMatrix, targets, cmp = cmp[[1]],
         normdata <- DESeq2::rlog(dds_deseq2, blind = TRUE)
     } else if (transformationMethod == "vst") {
         normdata <- DESeq2::varianceStabilizingTransformation(dds_deseq2,
-                                                              blind = TRUE)
+            blind = TRUE
+        )
     } else if (transformationMethod == "raw") {
         normdata <- dds
     }

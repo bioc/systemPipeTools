@@ -62,7 +62,7 @@ volcanoplot <- function(degseqDF, comparison,
         dplyr::select(paste0(comparison, "_FDR"), paste0(comparison, "_logFC")) %>%
         tibble::rownames_to_column(var = "names") %>%
         dplyr::mutate(significant = .data[[paste0(comparison, "_FDR")]] <= filter["FDR"] / 100 &
-                          abs(as.numeric(.data[[paste0(comparison, "_logFC")]])) > filter["Fold"])
+            abs(as.numeric(.data[[paste0(comparison, "_logFC")]])) > filter["Fold"])
     table$significant[is.na(table$significant)] <- FALSE
     if (!is.null(genes)) {
         genes <- table %>%

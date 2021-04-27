@@ -30,11 +30,14 @@ expression values and identifies batch effects.
 ## Targets file
 targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
 targets <- read.delim(targetspath, comment = "#")
-cmp <- systemPipeR::readComp(file = targetspath, format = "matrix", delim = "-")
+cmp <- systemPipeR::readComp(file = targetspath, format = "matrix", 
+delim = "-")
 ## Count table file
-countMatrixPath <- system.file("extdata", "countDFeByg.xls", package = "systemPipeR")
+countMatrixPath <- system.file("extdata", "countDFeByg.xls", 
+package = "systemPipeR")
 countMatrix <- read.delim(countMatrixPath, row.names = 1)
 ## Plot
-exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, transformationMethod = "rlog")
+exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
+preFilter = NULL, transformationMethod = "rlog")
 PCAplot(exploredds, plotly = TRUE)
 }

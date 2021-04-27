@@ -39,7 +39,6 @@ knitr::opts_chunk$set(
 ```{r setup, echo=FALSE, messages=FALSE, warnings=FALSE, eval=TRUE}
 suppressPackageStartupMessages({
     library(systemPipeTools)
-  library(systemPipeR)
 })
 ```
 
@@ -55,6 +54,29 @@ Stochastic Neighbor embedding (t-SNE), and MA and volcano plots.
 All these utilities can be integrated with the modular design of the *systemPipeR* 
 environment that allows users to easily substitute any of these features and/or 
 custom with alternatives.  
+
+## Installation
+
+ *`systemPipeTools`* environment can be installed from the R console using the [*`BiocManager::install`*](https://cran.r-project.org/web/packages/BiocManager/index.html) 
+ command. The associated package [*`systemPipeR`*](http://bioconductor.org/packages/release/bioc/html/systemPipeR.html) 
+ can be installed the same way. The latter provides core functionalities for 
+ defining workflows, interacting with command-line software, and executing both 
+ R and/or command-line software, as well as generating publication-quality 
+ analysis reports.
+
+```{r install, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install("systemPipeTools")
+BiocManager::install("systemPipeR")
+```
+
+### Loading package and documentation
+
+```{r documentation, eval=FALSE}
+library("systemPipeTools")  # Loads the package
+library(help = "systemPipeTools")  # Lists package info
+vignette("systemPipeTools")  # Opens vignette
+```
 
 ## Metadata and Reads Counting Information
 
@@ -131,7 +153,7 @@ it is possible to generate the `pheatmap` or `plotly` plot format.
 
 ```{r heatMaplot_samples, eval=TRUE}
 ## Samples plot
-heatMaplot(exploredds, clust = "samples", plotly = TRUE)
+heatMaplot(exploredds, clust = "samples", plotly = FALSE)
 ```
 
 If `ind` selected in the `clust` argument, it is necessary to provide the list of

@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Dimension Reduction with GLMplot — GLMplot" />
-<meta property="og:description" content="This function computes and plots generalized principal components
-analysis for dimension reduction of count expression matrix." />
+<meta property="og:description" content="This function computes and plots generalized principal
+components analysis for dimension reduction of count expression matrix." />
 
 
 
@@ -73,7 +73,7 @@ analysis for dimension reduction of count expression matrix." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">systemPipeTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.3</span>
       </span>
     </div>
 
@@ -113,8 +113,8 @@ analysis for dimension reduction of count expression matrix." />
     </div>
 
     <div class="ref-description">
-    <p>This function computes and plots generalized principal components
-analysis for dimension reduction of count expression matrix.</p>
+    <p>This function computes and plots generalized principal
+components analysis for dimension reduction of count expression matrix.</p>
     </div>
 
     <pre class="usage"><span class='fu'>GLMplot</span><span class='op'>(</span><span class='va'>exploredds</span>, plotly <span class='op'>=</span> <span class='cn'>FALSE</span>, savePlot <span class='op'>=</span> <span class='cn'>FALSE</span>, filePlot <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -124,13 +124,14 @@ analysis for dimension reduction of count expression matrix.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>exploredds</th>
-      <td><p>object of class <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html'>DESeq2::DESeqDataSet()</a></code>, generated from <code>exploreDDS</code> function.
-Also, accepts the <code>date.frame</code> containing raw read counts.</p></td>
+      <td><p>object of class <code><a href='https://rdrr.io/pkg/DESeq2/man/DESeqDataSet.html'>DESeq2::DESeqDataSet()</a></code>, generated from
+<code>exploreDDS</code> function. Also, accepts the <code>date.frame</code> containing raw read
+counts.</p></td>
     </tr>
     <tr>
       <th>plotly</th>
-      <td><p>logical: when <code>FALSE</code> (default), the <code>ggplot2</code> plot will be returned.
-<code>TRUE</code> option returns the <code>plotly</code> version of the plot.</p></td>
+      <td><p>logical: when <code>FALSE</code> (default), the <code>ggplot2</code> plot will be
+returned. <code>TRUE</code> option returns the <code>plotly</code> version of the plot.</p></td>
     </tr>
     <tr>
       <th>savePlot</th>
@@ -139,8 +140,8 @@ If <code>TRUE</code> the plot will be saved, and requires the <code>filePlot</co
     </tr>
     <tr>
       <th>filePlot</th>
-      <td><p>file name where the plot will be saved. For more information, please consult the
-<code><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggplot2::ggsave()</a></code> function.</p></td>
+      <td><p>file name where the plot will be saved. For more information,
+please consult the <code><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggplot2::ggsave()</a></code> function.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -156,12 +157,15 @@ If <code>TRUE</code> the plot will be saved, and requires the <code>filePlot</co
     <pre class="examples"><div class='input'><span class='co'>## Targets file</span>
 <span class='va'>targetspath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"targets.txt"</span>, package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
 <span class='va'>targets</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.delim</a></span><span class='op'>(</span><span class='va'>targetspath</span>, comment <span class='op'>=</span> <span class='st'>"#"</span><span class='op'>)</span>
-<span class='va'>cmp</span> <span class='op'>&lt;-</span> <span class='fu'>systemPipeR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/systemPipeR/man/readComp.html'>readComp</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='va'>targetspath</span>, format <span class='op'>=</span> <span class='st'>"matrix"</span>, delim <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='va'>cmp</span> <span class='op'>&lt;-</span> <span class='fu'>systemPipeR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/systemPipeR/man/readComp.html'>readComp</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='va'>targetspath</span>, format <span class='op'>=</span> <span class='st'>"matrix"</span>, 
+delim <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
 <span class='co'>## Count table file</span>
-<span class='va'>countMatrixPath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"countDFeByg.xls"</span>, package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
+<span class='va'>countMatrixPath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"countDFeByg.xls"</span>, 
+package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
 <span class='va'>countMatrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.delim</a></span><span class='op'>(</span><span class='va'>countMatrixPath</span>, row.names <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='co'>## Plot</span>
-<span class='va'>exploredds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='exploreDDS.html'>exploreDDS</a></span><span class='op'>(</span><span class='va'>countMatrix</span>, <span class='va'>targets</span>, cmp <span class='op'>=</span> <span class='va'>cmp</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, preFilter <span class='op'>=</span> <span class='cn'>NULL</span>, transformationMethod <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
+<span class='va'>exploredds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='exploreDDS.html'>exploreDDS</a></span><span class='op'>(</span><span class='va'>countMatrix</span>, <span class='va'>targets</span>, cmp <span class='op'>=</span> <span class='va'>cmp</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, 
+preFilter <span class='op'>=</span> <span class='cn'>NULL</span>, transformationMethod <span class='op'>=</span> <span class='st'>"raw"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: some variables in design formula are characters, converting to factors</span></div><div class='input'><span class='fu'>GLMplot</span><span class='op'>(</span><span class='va'>exploredds</span>, plotly <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='img'><img src='GLMplot-1.png' alt='' width='700' height='433' /></div></pre>
   </div>

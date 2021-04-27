@@ -14,17 +14,17 @@
 #' @examples
 #' showDT(iris)
 showDT <- function(data, ...) {
-  DT::datatable(
-    data,
-    extensions = c("FixedColumns", "Scroller"),
-    options = list(
-      scrollX = TRUE,
-      fixedColumns = TRUE,
-      deferRender = TRUE,
-      scrollY = 200,
-      scroller = TRUE
+    DT::datatable(
+        data,
+        extensions = c("FixedColumns", "Scroller"),
+        options = list(
+            scrollX = TRUE,
+            fixedColumns = TRUE,
+            deferRender = TRUE,
+            scrollY = 200,
+            scroller = TRUE
+        )
     )
-  )
 }
 ## Usage:
 # targetspath <- system.file("extdata", "targets.txt", package="systemPipeR") 
