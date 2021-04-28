@@ -120,7 +120,7 @@ sets with more complex experimental designs.
 To decide which transformation to choose, we can visualize the transformation effect 
 comparing two samples or a grid of all samples, as follows:
 
-```{r exploreDDSplot, eval=TRUE, warning=FALSE}
+```{r exploreDDSplot, eval=FALSE, warning=FALSE, message=FALSE}
 exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL,
                samples = c("M12A", "M12A", "A12A", "A12A"), scattermatrix = TRUE)
 ```
@@ -202,7 +202,7 @@ The function provides the utility to save the plot automatically.
 This function computes and plots generalized principal components analysis for 
 dimension reduction of count expression matrix.
 
-```{r GLMplot, eval=TRUE, warning=FALSE}
+```{r GLMplot, eval=TRUE, warning=FALSE, message=FALSE}
 exploredds_r <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
                          preFilter = NULL, transformationMethod = "raw")
 GLMplot(exploredds_r, plotly = FALSE)

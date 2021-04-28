@@ -125,10 +125,11 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
     lvl <- levels(factor(transform_df$transformation))
     ## plot
     if (scattermatrix == TRUE) {
+        suppressMessages({
         plot <- GGally::ggpairs(transform_df,
             title = "Scatterplot of transformed counts",
-            ggplot2::aes_string(colour = "transformation")
-        )
+            ggplot2::aes_string(colour = "transformation"))
+        })
     } else {
         plot <- ggplot2::ggplot(transform_df, ggplot2::aes(
             x = .data[[names[1]]],

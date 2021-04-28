@@ -16,9 +16,10 @@ countMatrixPath <- system.file("extdata", "countDFeByg.xls",
                                package = "systemPipeR")
 countMatrix <- read.delim(countMatrixPath, row.names = 1)[,13:16]
 ## exploreDDS
-expect_warning(exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
+exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], 
                                         preFilter = NULL, 
-                                        transformationMethod = "rlog"))
+                                        transformationMethod = "rlog")
+expect_s4_class(exploredds, "DESeqTransform")
 ## Plot exploreDDSplot
 p1 <- exploreDDSplot(countMatrix, targets, cmp=cmp[[1]], preFilter=NULL, 
                      samples=c(1,2))
@@ -59,9 +60,9 @@ p9 <- volcanoplot(degseqDF, comparison = "M12-A12",
                   filter = c(Fold = 1, FDR = 20), genes = "ATCG00280")
 expect_s3_class(p9, "ggplot")
 ## Plot GLMplot
-expect_warning(exploredds_raw <- exploreDDS(countMatrix, targets, cmp=cmp[[1]], 
-                             preFilter=NULL, transformationMethod="raw"), 
-               "some variables in design formula are characters")
+exploredds_raw <- exploreDDS(countMatrix, targets, cmp=cmp[[1]], 
+                             preFilter=NULL, transformationMethod="raw")
+expect_s4_class(exploredds_raw, "DESeqDataSet")
 p10 <- GLMplot(exploredds_raw, plotly = FALSE)
 expect_s3_class(p10, "ggplot")
 })

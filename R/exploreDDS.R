@@ -81,10 +81,12 @@ exploreDDS <- function(countMatrix, targets, cmp = cmp[[1]],
     samples <- as.character(targets$Factor)
     names(samples) <- paste(as.character(targets$SampleName), "", sep = "")
     ## Create full DESeqDataSet object
+    suppressWarnings({
     dds <- DESeq2::DESeqDataSetFromMatrix(
         countData = countMatrix,
         colData = data.frame(condition = samples), design = ~condition
     )
+    })
     ## Pre-filtering
     if (!is.null(preFilter)) {
         if (!is.numeric(preFilter)) stop("'preFilter' needs to be numeric 
