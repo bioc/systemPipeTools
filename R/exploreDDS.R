@@ -3,8 +3,8 @@
 ################
 #' @title exploreDDS
 #' @description Convenience wrapper function to transform raw read counts using 
-#' the [DESeq2::DESeq2-package()] package transformations methods. The input file
-#' has to contain all the genes, not just differentially expressed ones.
+#' the [DESeq2::DESeq2-package()] package transformations methods. The input 
+#' file has to contain all the genes, not just differentially expressed ones.
 #'
 #' @param countMatrix `date.frame` or `matrix` containing raw read counts.
 #' @param targets targets `data.frame`.
@@ -32,9 +32,11 @@
 #' data sets with more complex experimental designs.
 #'
 #' @references For more details on `DESeq2`, please consult the following
-#' page: \href{http://bioconductor.org/packages/release/bioc/html/DESeq2.html}{DESeq2}.
+#' page: 
+#'\href{http://bioconductor.org/packages/release/bioc/html/DESeq2.html}{DESeq2}.
 #' For more details on `targets` file definition, please consult the following
-#' page: \href{http://www.bioconductor.org/packages/release/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html#25_structure_of_targets_file}{systemPipeR}.
+#' page: 
+#' \href{http://www.bioconductor.org/packages/release/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html#25_structure_of_targets_file}{systemPipeR}.
 #'
 #' @author Daniela Cassol
 #'
@@ -62,7 +64,6 @@
 exploreDDS <- function(countMatrix, targets, cmp = cmp[[1]],
                        preFilter = NULL, transformationMethod = "raw",
                        blind = TRUE) {
-    ## A few validations ##
     if (!transformationMethod %in% c("raw", "rlog", "vst")) {
         stop("Supported methods include 'raw', 'rlog' and 'vst'")
     }
@@ -77,33 +78,27 @@ exploreDDS <- function(countMatrix, targets, cmp = cmp[[1]],
     if (!is.data.frame(targets)) stop("targets needs to be assignes an object
                                       of class 'data.frame'")
     if (all(!is.matrix(cmp) & length(cmp) == 2)) cmp <- t(as.matrix(cmp))
-    ## Samples
     samples <- as.character(targets$Factor)
     names(samples) <- paste(as.character(targets$SampleName), "", sep = "")
-    ## Create full DESeqDataSet object
     suppressWarnings({
-    dds <- DESeq2::DESeqDataSetFromMatrix(
-        countData = countMatrix,
-        colData = data.frame(condition = samples), design = ~condition
-    )
+        dds <- DESeq2::DESeqDataSetFromMatrix(
+            countData = countMatrix,
+            colData = data.frame(condition = samples), design = ~condition
+        )
     })
-    ## Pre-filtering
     if (!is.null(preFilter)) {
         if (!is.numeric(preFilter)) stop("'preFilter' needs to be numeric 
                                          value.")
         keep <- BiocGenerics::rowSums(DESeq2::counts(dds)) >= preFilter
         dds <- dds[keep, ]
     }
-    ## Estimate of (i) size factors, (ii) dispersion, (iii) negative binomial
-    ## GLM fitting and (iv) Wald statistics
     dds_deseq2 <- DESeq2::DESeq(dds, quiet = TRUE)
     ## Count data transformations
     if (transformationMethod == "rlog") {
         normdata <- DESeq2::rlog(dds_deseq2, blind = TRUE)
     } else if (transformationMethod == "vst") {
         normdata <- DESeq2::varianceStabilizingTransformation(dds_deseq2,
-            blind = TRUE
-        )
+            blind = TRUE)
     } else if (transformationMethod == "raw") {
         normdata <- dds
     }

@@ -6,8 +6,8 @@
 #' components analysis for dimension reduction of count expression matrix.
 #'
 #' @param exploredds object of class [DESeq2::DESeqDataSet()], generated from 
-#' `exploreDDS` function. Also, accepts the `date.frame` containing raw read 
-#' counts.
+#' `exploreDDS` function.
+#' @param L desired number of latent dimensions (positive integer).
 #' @param plotly logical: when `FALSE` (default), the `ggplot2` plot will be 
 #' returned. `TRUE` option returns the `plotly` version of the plot.
 #' @param savePlot logical: when `FALSE` (default), the plot will not be saved.
@@ -33,25 +33,29 @@
 #' preFilter = NULL, transformationMethod = "raw")
 #' GLMplot(exploredds, plotly = FALSE)
 #' @export
-#' @importFrom DESeq2 counts
-#' @importFrom ggplot2 ggplot aes aes_string geom_point coord_fixed ggtitle ggsave
+#' @importFrom ggplot2 ggplot aes_string geom_point aes coord_fixed ggtitle 
+#' ggsave
 #' @importFrom glmpca glmpca
 #' @importFrom plotly ggplotly
-GLMplot <- function(exploredds, plotly = FALSE, savePlot = FALSE, 
+#' @importFrom SummarizedExperiment assay
+#' @keywords visualization
+#' @references 
+#'   F. William Townes and Kelly Street (2020). glmpca: Dimension Reduction of 
+#'   Non-Normally Distributed Data. R package version 0.2.0. 
+#'   <https://CRAN.R-project.org/package=glmpca>
+GLMplot <- function(exploredds, L = 2, plotly = FALSE, savePlot = FALSE,
                     filePlot = NULL, ...) {
     ## Add validation, need to be counts reads
-    if (is.data.frame(exploredds)) {
-        count_mat <- exploredds
-    } else if (any(methods::is(exploredds) == "DESeqDataSet")) {
-        count_mat <- DESeq2::counts(exploredds)
-    } else if (any(!methods::is(exploredds) == "DESeqDataSet")) {
-        stop("'exploredds' needs to be assignes an object of class 'DESeqDataSet'.
-             For more information check 'help(exploreDDS)', 
-             and select the transformationMethod='raw'")
-    }
+    if (inherits(exploredds, "DESeqDataSet")) {
+        count_mat <- SummarizedExperiment::assay(exploredds)
+    } else if (!inherits(exploredds, "DESeqDataSet")) {
+          stop("'exploredds' needs to be assignes an object of class 
+             'DESeqDataSet'. For more information check 
+             'help(exploreDDS)', and select the transformationMethod='raw'")
+      }
     ## glmpca is performed on raw counts
     nozero <- count_mat[which(rowSums(count_mat) > 0), ]
-    gpca <- glmpca::glmpca(nozero, L = 2, ...)
+    gpca <- glmpca::glmpca(nozero, L = L, ...)
     gpca.dat <- gpca$factors
     gpca.dat$condition <- exploredds$condition
     Samples <- as.character(exploredds$condition)
@@ -61,6 +65,9 @@ GLMplot <- function(exploredds, plotly = FALSE, savePlot = FALSE,
         ggplot2::ggtitle("Generalized PCA (GLM-PCA)")
     ## Save plot
     if (savePlot == TRUE) {
+        if (is.null(filePlot)) {
+              stop("Argument 'filePlot' is missing, please provide file name.")
+          }
         ggplot2::ggsave(plot = plot, filename = filePlot)
     }
     ## Return

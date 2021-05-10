@@ -1,13 +1,13 @@
 Package: systemPipeTools
 Title: Tools for data visualization
-Version: 0.99.9
-Date: 2021-05-02
+Version: 0.99.10
+Date: 2021-05-07
 Authors@R: c(
     person(given = "Daniela", family = "Cassol", role = c("aut", "cre"), email = "danicassol@gmail.com"),
     person(given = "Ponmathi", family = "Ramasamy", role = c("aut"), email = "prama008@ucr.edu"),
     person(given = "Le", family = "Zhang", role = c("aut"), email = "le.zhang001@email.ucr.edu"),
     person(given = "Thomas", family = "Girke", role = c("aut"), email = "thomas.girke@ucr.edu"))
-Description: The systemPipeTools package provides a set of utilities for High Throughput Sequence Data Visualization. This package extends the widely used systemPipeR workflow environment with enhanced toolkit for data visualization, including utilities to automate the analysis of differentially expressed genes (DEGs). systemPipeTools provides functions for data transformation and data exploration via scatterplots, hierarchical clustering heatMaps, principal component analysis, multidimensional scaling, generalized principal components, t-Distributed Stochastic Neighbor embedding (t-SNE), and MA and volcano plots.
+Description: systemPipeTools package extends the widely used systemPipeR (SPR) workflow environment with an enhanced toolkit for data visualization, including utilities to automate the data visualizaton for analysis of differentially expressed genes (DEGs). systemPipeTools provides data transformation and data exploration functions via scatterplots, hierarchical clustering heatMaps, principal component analysis, multidimensional scaling, generalized principal components, t-Distributed Stochastic Neighbor embedding (t-SNE), and MA and volcano plots. All these utilities can be integrated with the modular design of the systemPipeR environment that allows users to easily substitute any of these features and/or custom with alternatives.
 Imports: 
     DESeq2,
     GGally,

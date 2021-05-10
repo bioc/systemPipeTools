@@ -40,10 +40,11 @@
 
 
 <meta property="og:title" content="t-Distributed Stochastic Neighbor embedding with tSNEplot — tSNEplot" />
-<meta property="og:description" content="This function computes and plots t-Distributed Stochastic Neighbor
-embedding (t-SNE) analysis for unsupervised nonlinear dimensionality reduction
-of count expression matrix. Internally, it is applied the Rtsne::Rtsne()
-function, using the exact t-SNE computing with theta=0.0." />
+<meta property="og:description" content="This function computes and plots t-Distributed Stochastic
+Neighbor embedding (t-SNE) analysis for unsupervised nonlinear
+dimensionality reduction of count expression matrix. Internally, it is
+applied the
+Rtsne::Rtsne() function, using the exact t-SNE computing with theta=0.0." />
 
 
 
@@ -75,7 +76,7 @@ function, using the exact t-SNE computing with theta=0.0." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">systemPipeTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.10</span>
       </span>
     </div>
 
@@ -115,10 +116,11 @@ function, using the exact t-SNE computing with theta=0.0." />
     </div>
 
     <div class="ref-description">
-    <p>This function computes and plots t-Distributed Stochastic Neighbor
-embedding (t-SNE) analysis for unsupervised nonlinear dimensionality reduction
-of count expression matrix. Internally, it is applied the <code><a href='https://rdrr.io/pkg/Rtsne/man/Rtsne.html'>Rtsne::Rtsne()</a></code>
-function, using the exact t-SNE computing with <code>theta=0.0</code>.</p>
+    <p>This function computes and plots t-Distributed Stochastic
+Neighbor embedding (t-SNE) analysis for unsupervised nonlinear
+dimensionality reduction of count expression matrix. Internally, it is
+applied the
+<code><a href='https://rdrr.io/pkg/Rtsne/man/Rtsne.html'>Rtsne::Rtsne()</a></code> function, using the exact t-SNE computing with <code>theta=0.0</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>tSNEplot</span><span class='op'>(</span>
@@ -143,8 +145,8 @@ function, using the exact t-SNE computing with <code>theta=0.0</code>.</p>
     </tr>
     <tr>
       <th>plotly</th>
-      <td><p>logical: when <code>FALSE</code> (default), the <code>ggplot2</code> plot will be returned.
-<code>TRUE</code> option returns the <code>plotly</code> version of the plot.</p></td>
+      <td><p>logical: when <code>FALSE</code> (default), the <code>ggplot2</code> plot will be
+returned. <code>TRUE</code> option returns the <code>plotly</code> version of the plot.</p></td>
     </tr>
     <tr>
       <th>savePlot</th>
@@ -153,8 +155,8 @@ If <code>TRUE</code> the plot will be saved, and requires the <code>filePlot</co
     </tr>
     <tr>
       <th>filePlot</th>
-      <td><p>file name where the plot will be saved. For more information, please consult the
-<code><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggplot2::ggsave()</a></code> function.</p></td>
+      <td><p>file name where the plot will be saved. For more
+information, please consult the <code><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggplot2::ggsave()</a></code> function.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -165,12 +167,19 @@ If <code>TRUE</code> the plot will be saved, and requires the <code>filePlot</co
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>returns an object of <code>ggplot</code> or <code>plotly</code> class.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Jesse H. Krijthe (2015). Rtsne: T-Distributed Stochastic Neighbor Embedding
+using a Barnes-Hut Implementation, URL: <a href='https://github.com/jkrijthe/Rtsne'>https://github.com/jkrijthe/Rtsne</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>targetspath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"targets.txt"</span>, package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>targetspath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"targets.txt"</span>,
+package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
 <span class='va'>targets</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.delim</a></span><span class='op'>(</span><span class='va'>targetspath</span>, comment <span class='op'>=</span> <span class='st'>"#"</span><span class='op'>)</span>
-<span class='va'>cmp</span> <span class='op'>&lt;-</span> <span class='fu'>systemPipeR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/systemPipeR/man/readComp.html'>readComp</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='va'>targetspath</span>, format <span class='op'>=</span> <span class='st'>"matrix"</span>, delim <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
-<span class='va'>countMatrixPath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"countDFeByg.xls"</span>, package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
+<span class='va'>cmp</span> <span class='op'>&lt;-</span> <span class='fu'>systemPipeR</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/systemPipeR/man/readComp.html'>readComp</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='va'>targetspath</span>, format <span class='op'>=</span> <span class='st'>"matrix"</span>,
+delim <span class='op'>=</span> <span class='st'>"-"</span><span class='op'>)</span>
+<span class='va'>countMatrixPath</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"countDFeByg.xls"</span>,
+package <span class='op'>=</span> <span class='st'>"systemPipeR"</span><span class='op'>)</span>
 <span class='va'>countMatrix</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.delim</a></span><span class='op'>(</span><span class='va'>countMatrixPath</span>, row.names <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span>
 <span class='fu'>tSNEplot</span><span class='op'>(</span><span class='va'>countMatrix</span>, <span class='va'>targets</span>, perplexity <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>

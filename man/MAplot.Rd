@@ -21,15 +21,17 @@ MAplot(
 
 \item{FDR.cutoff}{filter cutoffs for the p-value adjusted.}
 
-\item{comparison}{\verb{character vector} specifying the factor names for comparison..}
+\item{comparison}{\verb{character vector} specifying the factor names for
+comparison.}
 
-\item{filter}{Named vector with filter cutoffs of format c(Fold=2, FDR=1) where
-Fold refers to the fold change cutoff (unlogged) and FDR to the p-value cutoff.}
+\item{filter}{Named vector with filter cutoffs of format c(Fold=2, FDR=1)
+where Fold refers to the fold change cutoff (unlogged) and FDR to the
+p-value cutoff.}
 
 \item{genes}{\verb{character vecto}r of genes names to show on the plot.}
 
-\item{plotly}{logical: when \code{FALSE} (default), the \code{ggplot2} plot will be returned.
-\code{TRUE} option returns the \code{plotly} version of the plot.}
+\item{plotly}{logical: when \code{FALSE} (default), the \code{ggplot2} plot will be
+returned. \code{TRUE} option returns the \code{plotly} version of the plot.}
 
 \item{savePlot}{logical: when \code{FALSE} (default), the plot will not be saved.
 If \code{TRUE} the plot will be saved, and requires the \code{filePlot} argument.}
@@ -72,3 +74,4 @@ MAplot(degseqDF,
     genes = "ATCG00280"
 )
 }
+\keyword{visualization}

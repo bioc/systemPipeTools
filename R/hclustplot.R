@@ -45,10 +45,14 @@
 #' @importFrom plotly ggplotly
 #' @importFrom stats cor hclust dist
 #' @importFrom SummarizedExperiment assay
+#' @keywords visualization
 hclustplot <- function(exploredds, method = "spearman", plotly = FALSE,
                        savePlot = FALSE, filePlot = NULL) {
     ## Validations
-    if (all(!methods::is(exploredds) == "DESeqTransform")) stop("'exploredds' needs to be assignes an object of class 'DESeqTransform'. For more information check 'help(exploreDDS)'.")
+    if (!inherits(exploredds, "DESeqTransform")) {
+        stop("'exploredds' needs to be assignes an object of class 
+             'DESeqTransform'. For more information check 'help(exploreDDS)'.")
+    }
     ## cor() computes the correlation coefficient
     d <- stats::cor(SummarizedExperiment::assay(exploredds), method = method)
     ## Hierarchical cluster analysis
@@ -59,6 +63,9 @@ hclustplot <- function(exploredds, method = "spearman", plotly = FALSE,
         ggplot2::coord_cartesian(clip = "off") +
         ggtree::theme_tree(plot.margin = ggplot2::margin(6, 60, 6, 6))
     if (savePlot == TRUE) {
+        if (is.null(filePlot)) {
+            stop("Argument 'filePlot' is missing, please provide file name.")
+        }
         ggplot2::ggsave(filePlot, scale = 0.8)
     }
     ## Return

@@ -4,12 +4,20 @@
 \alias{GLMplot}
 \title{Dimension Reduction with GLMplot}
 \usage{
-GLMplot(exploredds, plotly = FALSE, savePlot = FALSE, filePlot = NULL, ...)
+GLMplot(
+  exploredds,
+  L = 2,
+  plotly = FALSE,
+  savePlot = FALSE,
+  filePlot = NULL,
+  ...
+)
 }
 \arguments{
 \item{exploredds}{object of class \code{\link[DESeq2:DESeqDataSet]{DESeq2::DESeqDataSet()}}, generated from
-\code{exploreDDS} function. Also, accepts the \code{date.frame} containing raw read
-counts.}
+\code{exploreDDS} function.}
+
+\item{L}{desired number of latent dimensions (positive integer).}
 
 \item{plotly}{logical: when \code{FALSE} (default), the \code{ggplot2} plot will be
 returned. \code{TRUE} option returns the \code{plotly} version of the plot.}
@@ -44,3 +52,9 @@ exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]],
 preFilter = NULL, transformationMethod = "raw")
 GLMplot(exploredds, plotly = FALSE)
 }
+\references{
+F. William Townes and Kelly Street (2020). glmpca: Dimension Reduction of
+Non-Normally Distributed Data. R package version 0.2.0.
+\url{https://CRAN.R-project.org/package=glmpca}
+}
+\keyword{visualization}

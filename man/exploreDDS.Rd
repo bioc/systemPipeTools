@@ -41,8 +41,8 @@ returns an object of class \code{\link[DESeq2:DESeqTransform]{DESeq2::DESeqTrans
 }
 \description{
 Convenience wrapper function to transform raw read counts using
-the \code{\link[DESeq2:DESeq2-package]{DESeq2::DESeq2-package()}} package transformations methods. The input file
-has to contain all the genes, not just differentially expressed ones.
+the \code{\link[DESeq2:DESeq2-package]{DESeq2::DESeq2-package()}} package transformations methods. The input
+file has to contain all the genes, not just differentially expressed ones.
 }
 \details{
 Note that the recommendation is to use the resulting transformed
@@ -72,9 +72,11 @@ exploredds
 }
 \references{
 For more details on \code{DESeq2}, please consult the following
-page: \href{http://bioconductor.org/packages/release/bioc/html/DESeq2.html}{DESeq2}.
+page:
+\href{http://bioconductor.org/packages/release/bioc/html/DESeq2.html}{DESeq2}.
 For more details on \code{targets} file definition, please consult the following
-page: \href{http://www.bioconductor.org/packages/release/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html#25_structure_of_targets_file}{systemPipeR}.
+page:
+\href{http://www.bioconductor.org/packages/release/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html#25_structure_of_targets_file}{systemPipeR}.
 }
 \author{
 Daniela Cassol

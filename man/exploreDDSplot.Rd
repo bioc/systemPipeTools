@@ -77,15 +77,4 @@ exploreDDSplot(countMatrix, targets,
     cmp = cmp[[1]], preFilter = NULL,
     samples = c(3, 4)
 )
-\dontrun{
-exploreDDSplot(countMatrix, targets,
-    cmp = cmp[[1]], samples = c("M1A", "M1B"), save = TRUE,
-    filePlot = "transf_deseq2.pdf"
-)
-## Plot Correlogram
-exploreDDSplot(countMatrix, targets,
-    cmp = cmp[[1]], preFilter = NULL,
-    samples = c("M1A", "M1B"), scattermatrix = TRUE
-)
-}
 }

@@ -63,54 +63,54 @@
 #' @importFrom plotly plot_ly
 #' @importFrom stats dist
 #' @importFrom SummarizedExperiment assay
+#' @keywords visualization
+#' @references 
+#' Raivo Kolde (2019). pheatmap: Pretty Heatmaps. R package version 1.0.12.
+#' <https://CRAN.R-project.org/package=pheatmap>
 heatMaplot <- function(exploredds, clust, DEGlist = NULL, plotly = FALSE,
                        savePlot = FALSE, filePlot = NULL, ...) {
     ## Validations
-    if (all(!methods::is(exploredds) == "DESeqTransform")) stop("'exploredds' needs to be assignes an object of class 'DESeqTransform'. For more information check 'help(exploreDDS)'")
+    if (!inherits(exploredds, "DESeqTransform")) {
+        stop("'exploredds' needs to be assignes an object of class 
+             'DESeqTransform'. For more information check 'help(exploreDDS)'")}
     anno <- as.data.frame(exploredds$condition)
     colnames(anno) <- "Condition"
-    ## sample-to-sample distances
     if (clust == "samples") {
         sampleDists <- stats::dist(t(SummarizedExperiment::assay(exploredds)))
         sampleDistMatrix <- as.matrix(sampleDists)
         rownames(anno) <- colnames(sampleDistMatrix)
         if (plotly == FALSE) {
             pheatPlot <- pheatmap::pheatmap(sampleDistMatrix,
-                                            clustering_distance_rows = sampleDists,
-                                            clustering_distance_cols = sampleDists, annotation_col = anno
-            )
+                clustering_distance_rows = sampleDists,
+                clustering_distance_cols = sampleDists,
+                annotation_col = anno)
         } else if (plotly == TRUE) {
             plot <- plotly::plot_ly(
                 x = colnames(sampleDistMatrix), y = rownames(sampleDistMatrix),
-                z = sampleDistMatrix, type = "heatmap"
-            )
-        }
+                z = sampleDistMatrix, type = "heatmap")}
     } else if (clust == "ind") {
-        ## Hierarchical clustering on the transformed expression matrix 
-        ## subsetted by the DEGs identified in differential expression analysis.
-        if (any(is.null(DEGlist) | !is.character(DEGlist))) stop("Provide a character vector with the gene names identified in differential expression analysis.")
+        if (any(is.null(DEGlist) | !is.character(DEGlist))) {
+            stop("Provide a character vector with the gene names identified in 
+                 differential expression analysis.")}
         dist <- SummarizedExperiment::assay(exploredds)[DEGlist, ]
         rownames(anno) <- colnames(dist)
         if (plotly == FALSE) {
             pheatPlot <- pheatmap::pheatmap(dist,
-                                            scale = "row", clustering_distance_rows = "correlation",
-                                            clustering_distance_cols = "correlation", annotation_col = anno
-            )
+                scale = "row",
+                clustering_distance_rows = "correlation",
+                clustering_distance_cols = "correlation",
+                annotation_col = anno)
         } else if (plotly == TRUE) {
             plot <- plotly::plot_ly(
                 x = colnames(dist), y = rownames(dist), z = dist,
-                type = "heatmap"
-            )
-        }
+                type = "heatmap")}
     } else {
-        stop("Supported clust include 'samples' and 'ind'")
-    }
+        stop("Supported clust include 'samples' and 'ind'") }
     if (savePlot == TRUE) {
-        ggplot2::ggsave(plot = pheatPlot, filename = filePlot)
-    }
-    ## Return
+        if (is.null(filePlot)) {
+            stop("Argument 'filePlot' is missing, please provide file name.")}
+        ggplot2::ggsave(plot = pheatPlot, filename = filePlot) }
     if (plotly == TRUE) {
-        return(plot)
-    }
+        return(plot)}
     return(pheatPlot)
 }

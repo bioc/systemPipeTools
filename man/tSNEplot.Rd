@@ -18,14 +18,14 @@ tSNEplot(
 
 \item{targets}{targets \code{data.frame}.}
 
-\item{plotly}{logical: when \code{FALSE} (default), the \code{ggplot2} plot will be returned.
-\code{TRUE} option returns the \code{plotly} version of the plot.}
+\item{plotly}{logical: when \code{FALSE} (default), the \code{ggplot2} plot will be
+returned. \code{TRUE} option returns the \code{plotly} version of the plot.}
 
 \item{savePlot}{logical: when \code{FALSE} (default), the plot will not be saved.
 If \code{TRUE} the plot will be saved, and requires the \code{filePlot} argument.}
 
-\item{filePlot}{file name where the plot will be saved. For more information, please consult the
-\code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} function.}
+\item{filePlot}{file name where the plot will be saved. For more
+information, please consult the \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} function.}
 
 \item{...}{additional parameters for the \code{\link[Rtsne:Rtsne]{Rtsne::Rtsne()}} function.}
 }
@@ -33,17 +33,26 @@ If \code{TRUE} the plot will be saved, and requires the \code{filePlot} argument
 returns an object of \code{ggplot} or \code{plotly} class.
 }
 \description{
-This function computes and plots t-Distributed Stochastic Neighbor
-embedding (t-SNE) analysis for unsupervised nonlinear dimensionality reduction
-of count expression matrix. Internally, it is applied the \code{\link[Rtsne:Rtsne]{Rtsne::Rtsne()}}
-function, using the exact t-SNE computing with \code{theta=0.0}.
+This function computes and plots t-Distributed Stochastic
+Neighbor embedding (t-SNE) analysis for unsupervised nonlinear
+dimensionality reduction of count expression matrix. Internally, it is
+applied the
+\code{\link[Rtsne:Rtsne]{Rtsne::Rtsne()}} function, using the exact t-SNE computing with \code{theta=0.0}.
 }
 \examples{
-targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
+targetspath <- system.file("extdata", "targets.txt",
+package = "systemPipeR")
 targets <- read.delim(targetspath, comment = "#")
-cmp <- systemPipeR::readComp(file = targetspath, format = "matrix", delim = "-")
-countMatrixPath <- system.file("extdata", "countDFeByg.xls", package = "systemPipeR")
+cmp <- systemPipeR::readComp(file = targetspath, format = "matrix",
+delim = "-")
+countMatrixPath <- system.file("extdata", "countDFeByg.xls",
+package = "systemPipeR")
 countMatrix <- read.delim(countMatrixPath, row.names = 1)
 set.seed(42)
 tSNEplot(countMatrix, targets, perplexity = 5)
 }
+\references{
+Jesse H. Krijthe (2015). Rtsne: T-Distributed Stochastic Neighbor Embedding
+using a Barnes-Hut Implementation, URL: \url{https://github.com/jkrijthe/Rtsne}
+}
+\keyword{visualization}

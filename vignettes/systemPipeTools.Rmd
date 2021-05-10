@@ -1,6 +1,6 @@
 ---
 title: "systemPipeTools: Data Visualizations" 
-author: "Author: Daniela Cassol (danielac@ucr.edu) and Thomas Girke (thomas.girke@ucr.edu)"
+author: "Author: Daniela Cassol and Thomas Girke"
 date: "Last update: `r format(Sys.time(), '%d %B, %Y')`" 
 output:
   BiocStyle::html_document:
@@ -45,16 +45,18 @@ suppressPackageStartupMessages({
 
 # Data Visualization with `systemPipeR`
 
-*systemPipeTools* package extends the widely used *[systemPipeR](https://systempipe.org/)* (SPR) [@H_Backman2016-bt]
+*systemPipeTools* package extends the widely used 
+*[systemPipeR](https://systempipe.org/)* (SPR) [@H_Backman2016-bt]
 workflow environment with enhanced toolkit for data visualization, 
-including utilities to automate the analysis of differentially expressed genes (DEGs).
-*systemPipeTools* provides functions for data transformation and data exploration via 
-scatterplots, hierarchical clustering heatMaps, principal component analysis, 
-multidimensional scaling, generalized principal components, t-Distributed 
-Stochastic Neighbor embedding (t-SNE), and MA and volcano plots. 
-All these utilities can be integrated with the modular design of the *systemPipeR* 
-environment that allows users to easily substitute any of these features and/or 
-custom with alternatives.  
+including utilities to automate the analysis of differentially expressed genes 
+(DEGs).
+*systemPipeTools* provides functions for data transformation and data 
+exploration via scatterplots, hierarchical clustering heatMaps, principal 
+component analysis, multidimensional scaling, generalized principal components,
+t-Distributed Stochastic Neighbor embedding (t-SNE), and MA and volcano plots. 
+All these utilities can be integrated with the modular design of the 
+*systemPipeR* environment that allows users to easily substitute any of these 
+features and/or custom with alternatives.  
 
 ## Installation
 
@@ -66,7 +68,8 @@ custom with alternatives.
  analysis reports.
 
 ```{r install, eval=FALSE}
-if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!requireNamespace("BiocManager", quietly = TRUE)) 
+  install.packages("BiocManager")
 BiocManager::install("systemPipeTools")
 BiocManager::install("systemPipeR")
 ```
@@ -82,16 +85,20 @@ vignette("systemPipeTools")  # Opens vignette
 ## Metadata and Reads Counting Information
 
 The first step is importing the `targets` file and raw reads counting table. 
-- The `targets` file defines all FASTQ files and sample comparisons of the analysis workflow.
-- The raw reads counting table represents all the reads that map to gene (row) for each sample (columns). 
+- The `targets` file defines all FASTQ files and sample comparisons of the 
+analysis workflow.
+- The raw reads counting table represents all the reads that map to gene 
+(row) for each sample (columns). 
 
 ```{r targets_counts, eval=TRUE}
 ## Targets file
 targetspath <- system.file("extdata", "targets.txt", package = "systemPipeR")
 targets <- read.delim(targetspath, comment = "#")
-cmp <- systemPipeR::readComp(file = targetspath, format = "matrix", delim = "-")
+cmp <- systemPipeR::readComp(file = targetspath, format = "matrix", 
+                             delim = "-")
 ## Count table file
-countMatrixPath <- system.file("extdata", "countDFeByg.xls", package = "systemPipeR")
+countMatrixPath <- system.file("extdata", "countDFeByg.xls",
+                               package = "systemPipeR")
 countMatrix <- read.delim(countMatrixPath, row.names = 1)
 showDT(countMatrix)
 ```
@@ -99,12 +106,14 @@ showDT(countMatrix)
 ## Data Transformation
 
 For gene differential expression, raw counts are required, however for data 
-visualization or clustering, it can be useful to work with transformed count data. 
-`exploreDDS` function is convenience wrapper to transform raw read counts using the 
-[`DESeq2`](@Love2014-sh) package transformations methods. The input file
-has to contain all the genes, not just differentially expressed ones. Supported
-methods include variance stabilizing transformation (`vst`) (@Anders2010-tp), and 
-regularized-logarithm transformation or `rlog` (@Love2014-sh). 
+visualization or clustering, it can be useful to work with transformed count 
+data. 
+`exploreDDS` function is convenience wrapper to transform raw read counts 
+using the [`DESeq2`](@Love2014-sh) package transformations methods. The input 
+file has to contain all the genes, not just differentially expressed ones. 
+Supported methods include variance stabilizing transformation (`vst`)
+(@Anders2010-tp), and regularized-logarithm transformation or `rlog` 
+(@Love2014-sh). 
 
 ```{r exploreDDS, eval=TRUE, warning=FALSE}
 exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL, 
@@ -112,18 +121,19 @@ exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL,
 exploredds
 ```
 
-Users are strongly encouraged to consult the [`DESeq2`](@Love2014-sh) vignette for 
-more detailed information on this topic and how to properly run `DESeq2` on data 
-sets with more complex experimental designs.
+Users are strongly encouraged to consult the [`DESeq2`](@Love2014-sh) vignette 
+for more detailed information on this topic and how to properly run `DESeq2` on 
+datasets with more complex experimental designs.
 
 ## Scatterplot
 
-To decide which transformation to choose, we can visualize the transformation effect 
-comparing two samples or a grid of all samples, as follows:
+To decide which transformation to choose, we can visualize the transformation 
+effect comparing two samples or a grid of all samples, as follows:
 
 ```{r exploreDDSplot, eval=FALSE, warning=FALSE, message=FALSE}
 exploreDDSplot(countMatrix, targets, cmp = cmp[[1]], preFilter = NULL,
-               samples = c("M12A", "M12A", "A12A", "A12A"), scattermatrix = TRUE)
+               samples = c("M12A", "M12A", "A12A", "A12A"), 
+               scattermatrix = TRUE)
 ```
 
 The scatterplots are created using the log2 transform normalized reads count, 
@@ -132,10 +142,11 @@ regularized-logarithm transformation or `rlog` (@Love2014-sh).
 
 ## Hierarchical Clustering Dendrogram 
 
-The following computes the sample-wise correlation coefficients using the `stats::cor()`
-function from the transformed expression values. After transformation to a
-distance matrix, hierarchical clustering is performed with the `stats::hclust`
-function and the result is plotted as a dendrogram, as follows:
+The following computes the sample-wise correlation coefficients using the 
+`stats::cor()` function from the transformed expression values. After 
+transformation to a distance matrix, hierarchical clustering is performed with
+the `stats::hclust` function and the result is plotted as a dendrogram, 
+as follows:
 
 ```{r hclustplot, eval=TRUE}
 hclustplot(exploredds, method = "spearman")
@@ -148,17 +159,18 @@ The function provides the utility to save the plot automatically.
 This function performs hierarchical clustering on the transformed expression 
 matrix generated within the `DESeq2` package. It uses, by default, a `Pearson` 
 correlation-based distance measure and complete linkage for cluster join.
-If `samples` selected in the `clust` argument, it will be applied the `stats::dist()`
-function to the transformed count matrix to get sample-to-sample distances. Also, 
-it is possible to generate the `pheatmap` or `plotly` plot format. 
+If `samples` selected in the `clust` argument, it will be applied the 
+`stats::dist()` function to the transformed count matrix to get sample-to-sample 
+distances. Also, it is possible to generate the `pheatmap` or `plotly` 
+plot format. 
 
 ```{r heatMaplot_samples, eval=TRUE}
 ## Samples plot
 heatMaplot(exploredds, clust = "samples", plotly = FALSE)
 ```
 
-If `ind` selected in the `clust` argument, it is necessary to provide the list of
-differentially expressed genes for the `exploredds` subset.
+If `ind` selected in the `clust` argument, it is necessary to provide the list 
+of differentially expressed genes for the `exploredds` subset.
 
 ```{r heatMaplot_DEG, eval=TRUE, warning=FALSE}
 ## Individuals genes identified in DEG analysis
@@ -176,9 +188,9 @@ The function provides the utility to save the plot automatically.
 
 ## Principal Component Analysis
 
-This function plots a Principal Component Analysis (PCA) from transformed expression 
-matrix. This plot shows samples variation based on the expression values and 
-identifies batch effects.
+This function plots a Principal Component Analysis (PCA) from transformed
+expression matrix. This plot shows samples variation based on the expression 
+values and identifies batch effects.
 
 ```{r PCAplot, eval=TRUE}
 PCAplot(exploredds, plotly = FALSE)
@@ -189,8 +201,9 @@ The function provides the utility to save the plot automatically.
 ## Multidimensional scaling with `MDSplot`
 
 This function computes and plots multidimensional scaling analysis for dimension 
-reduction of count expression matrix. Internally, it is applied the `stats::dist()`
-function to the transformed count matrix to get sample-to-sample distances.
+reduction of count expression matrix. Internally, it is applied the 
+`stats::dist()` function to the transformed count matrix to get sample-to-sample
+distances.
 
 ```{r MDSplot, eval=TRUE}
  MDSplot(exploredds, plotly = FALSE)
@@ -225,9 +238,10 @@ The function provides the utility to save the plot automatically.
 
 ## t-Distributed Stochastic Neighbor embedding with `tSNEplot`
 
-This function computes and plots t-Distributed Stochastic Neighbor embedding (t-SNE) 
-analysis for unsupervised nonlinear dimensionality reduction of count expression 
-matrix. Internally, it is applied the `Rtsne::Rtsne()` [@Rtsne] function, using the exact 
+This function computes and plots t-Distributed Stochastic Neighbor embedding 
+(t-SNE) analysis for unsupervised nonlinear dimensionality reduction of count 
+expression matrix. Internally, it is applied the `Rtsne::Rtsne()` [@Rtsne] 
+function, using the exact 
 t-SNE computing with `theta=0.0`.
 
 ```{r tSNEplot, eval=TRUE}
@@ -236,8 +250,8 @@ tSNEplot(countMatrix, targets, perplexity = 5)
 
 ## Volcano plot 
 
-A simple function that shows statistical significance (`p-value`) versus magnitude
-of change (`log2 fold change`).
+A simple function that shows statistical significance (`p-value`) versus 
+magnitude of change (`log2 fold change`).
 
 ```{r volcanoplot, eval=TRUE}
 volcanoplot(degseqDF, comparison = "M12-A12", filter = c(Fold = 1, FDR = 20), 

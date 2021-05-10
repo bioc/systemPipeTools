@@ -16,7 +16,7 @@
 #' returned. `TRUE` option returns the `plotly` version of the plot.
 #' @param savePlot logical: when `FALSE` (default), the plot will not be saved.
 #' If `TRUE` the plot will be saved, and requires the `filePlot` argument.
-#' @param filePlot file name where the plot will be saved. For more information, 
+#' @param filePlot file name where the plot will be saved. For more information,
 #' please consult the [ggplot2::ggsave()] function.
 #'
 #' @return returns an object of `ggplot` or `plotly` class.
@@ -37,35 +37,42 @@
 #' MDSplot(exploredds, plotly = FALSE)
 #' @export
 #' @importFrom DESeq2 DESeqTransform
-#' @importFrom ggplot2 ggplot aes_string geom_point scale_y_reverse ggtitle ggsave
+#' @importFrom ggplot2 ggplot aes_string geom_point scale_y_reverse ggtitle
+#'  ggsave
 #' @importFrom plotly ggplotly
 #' @importFrom stats cor dist cmdscale
 #' @importFrom SummarizedExperiment assay colData
-MDSplot <- function(exploredds, method = "spearman", plotly = FALSE, 
+#' @keywords visualization
+MDSplot <- function(exploredds, method = "spearman", plotly = FALSE,
                     savePlot = FALSE, filePlot = NULL) {
-    ## Add validation
-    if (all(!methods::is(exploredds) == "DESeqTransform")) {
-        warning("'exploredds' needs to be assignes an object of class 'DESeqTransform'.
-        Here we are converting the object into a 'DESeqTransform'class for
-        downstream analysis. For more information check 'help(exploreDDS)'")
-        exploredds <- DESeq2::DESeqTransform(exploredds)
+    ## Validations
+    if (!inherits(exploredds, "DESeqTransform")) {
+        stop("'exploredds' needs to be assignes an object of class 
+             'DESeqTransform'. For more information check 'help(exploreDDS)'")
     }
     ## transformation to a distance matrix
     d <- stats::cor(SummarizedExperiment::assay(exploredds), method = method)
     distmat <- stats::dist(1 - d)
     ## perform MDS
     mdsData <- data.frame(stats::cmdscale(distmat))
-    mds <- cbind(mdsData, 
-                 as.data.frame(SummarizedExperiment::colData(exploredds)))
+    mds <- cbind(
+        mdsData,
+        as.data.frame(SummarizedExperiment::colData(exploredds))
+    )
     Sample <- exploredds$condition
     ## plot
-    plot <- ggplot2::ggplot(mds, 
-                            ggplot2::aes_string("X1", "X2", color = Sample)) +
+    plot <- ggplot2::ggplot(
+        mds,
+        ggplot2::aes_string("X1", "X2", color = Sample)
+    ) +
         ggplot2::geom_point(size = 3) +
         ggplot2::scale_y_reverse() +
         ggplot2::ggtitle("Multidimensional Scaling (MDS)")
     ## Save plot
     if (savePlot == TRUE) {
+        if (is.null(filePlot)) {
+            stop("Argument 'filePlot' is missing, please provide file name.")
+        }
         ggplot2::ggsave(plot = plot, filename = filePlot)
     }
     ## Return

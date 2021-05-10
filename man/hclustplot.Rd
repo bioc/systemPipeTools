@@ -56,3 +56,4 @@ exploredds <- exploreDDS(countMatrix, targets,
 )
 hclustplot(exploredds, method = "spearman")
 }
+\keyword{visualization}

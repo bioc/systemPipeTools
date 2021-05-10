@@ -79,3 +79,8 @@ heatMaplot(exploredds,
     DEGlist = unique(as.character(unlist(DEG_list[[1]])))
 )
 }
+\references{
+Raivo Kolde (2019). pheatmap: Pretty Heatmaps. R package version 1.0.12.
+\url{https://CRAN.R-project.org/package=pheatmap}
+}
+\keyword{visualization}

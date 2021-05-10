@@ -53,3 +53,4 @@ exploredds <- exploreDDS(countMatrix, targets, cmp = cmp[[1]],
 preFilter = NULL, transformationMethod = "rlog")
 MDSplot(exploredds, plotly = FALSE)
 }
+\keyword{visualization}

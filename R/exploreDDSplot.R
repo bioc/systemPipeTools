@@ -50,17 +50,6 @@
 #'     cmp = cmp[[1]], preFilter = NULL,
 #'     samples = c(3, 4)
 #' )
-#' \dontrun{
-#' exploreDDSplot(countMatrix, targets,
-#'     cmp = cmp[[1]], samples = c("M1A", "M1B"), save = TRUE,
-#'     filePlot = "transf_deseq2.pdf"
-#' )
-#' ## Plot Correlogram
-#' exploreDDSplot(countMatrix, targets,
-#'     cmp = cmp[[1]], preFilter = NULL,
-#'     samples = c("M1A", "M1B"), scattermatrix = TRUE
-#' )
-#' }
 #' @export exploreDDSplot
 #' @importFrom DESeq2 estimateSizeFactors counts
 #' @importFrom dplyr bind_rows as_tibble mutate group_by do
@@ -74,52 +63,41 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
                            preFilter = NULL, samples, blind = TRUE,
                            scattermatrix = FALSE, plotly = FALSE,
                            savePlot = FALSE, filePlot = NULL) {
-    ## Validations
     SampleName <- targets$SampleName
     names(SampleName) <- targets$SampleName
-    if (is.numeric(samples)) {
+    if (all(samples == "ALL")) {
+        samples <- SampleName
+    } else {
         samples <- SampleName[samples]
-        if (!all(samples %in% SampleName)) {
-            stop(paste("samples position can be assigned from the following options",
-                paste0(1:length(SampleName),
-                    collapse = ", "), sep = " "))}
-    } else if (is.character(samples)) {
-        if (all(samples == "ALL")) {
-            samples <- SampleName
-            if (!scattermatrix == "TRUE") stop("'scattermatrix' argument needs
-                                               to set as TRUE in the case of ALL 
-                                               the samples selected.")
-        } else {
-            samples <- SampleName[samples]
-            if (!all(samples %in% SampleName)) {
-                stop(paste("samples names can be assigned from the following options",
-                    paste0((SampleName),
-                        collapse = ", "), sep = " "))}
-        }
     }
+    if(any(length(samples) > 2 && !scattermatrix == "TRUE"))
+        stop("'scattermatrix' argument needs to set as TRUE in the case of ALL 
+             the samples selected.")
+    if(any(is.na(samples))) 
+        stop(paste("samples names can be assigned from the following options", 
+                   "\n", paste0((SampleName), collapse = ", "), sep = " "))
     transformation <- . <- NULL
-    ## Calculate the data transformations
     suppressWarnings({
         vst <- exploreDDS(countMatrix, targets,
             cmp = cmp, preFilter = preFilter,
-            transformationMethod = "vst", blind = blind
-        )
+            transformationMethod = "vst", blind = blind)
         rlog <- exploreDDS(countMatrix, targets,
             cmp = cmp, preFilter = preFilter,
-            transformationMethod = "rlog", blind = blind
-        )
+            transformationMethod = "rlog", blind = blind)
         dss <- exploreDDS(countMatrix, targets,
             cmp = cmp, preFilter = preFilter,
-            transformationMethod = "raw"
-        )
+            transformationMethod = "raw")
         dss <- DESeq2::estimateSizeFactors(dss)
     })
     ## create dataframe with transformed values
     transform_df <- dplyr::bind_rows(
-        dplyr::as_tibble(log2(DESeq2::counts(dss, normalized = TRUE)[, samples] + 1)) %>%
+        dplyr::as_tibble(
+            log2(DESeq2::counts(dss, normalized = TRUE)[, samples] + 1)) %>%
             dplyr::mutate(transformation = "log2(x + 1)"),
-        dplyr::as_tibble(SummarizedExperiment::assay(vst)[, samples]) %>% dplyr::mutate(transformation = "vst"),
-        dplyr::as_tibble(SummarizedExperiment::assay(rlog)[, samples]) %>% dplyr::mutate(transformation = "rlog")
+        dplyr::as_tibble(SummarizedExperiment::assay(vst)[, samples]) %>% 
+            dplyr::mutate(transformation = "vst"),
+        dplyr::as_tibble(SummarizedExperiment::assay(rlog)[, samples]) %>% 
+            dplyr::mutate(transformation = "rlog")
     )
     names <- colnames(transform_df)[1:2]
     lvl <- levels(factor(transform_df$transformation))
@@ -128,13 +106,11 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
         suppressMessages({
         plot <- GGally::ggpairs(transform_df,
             title = "Scatterplot of transformed counts",
-            ggplot2::aes_string(colour = "transformation"))
-        })
+            ggplot2::aes_string(colour = "transformation"))})
     } else {
         plot <- ggplot2::ggplot(transform_df, ggplot2::aes(
             x = .data[[names[1]]],
-            y = .data[[names[2]]]
-        )) +
+            y = .data[[names[2]]])) +
             ggplot2::geom_hex(bins = 80) +
             ggplot2::coord_fixed() +
             ggplot2::facet_grid(. ~ transformation) +
@@ -142,6 +118,9 @@ exploreDDSplot <- function(countMatrix, targets, cmp = cmp[[1]],
             ggplot2::ylab(names[2])
     }
     if (savePlot == TRUE) {
+        if (is.null(filePlot)) {
+            stop("Argument 'filePlot' is missing, please provide file name.")
+        }
         ggplot2::ggsave(filePlot, scale = 0.8)
     }
     ## Return
