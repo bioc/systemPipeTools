@@ -1,6 +1,6 @@
 Package: systemPipeTools
 Title: Tools for data visualization
-Version: 1.14.0
+Version: 1.15.0
 Date: 2021-05-11
 Authors@R: c(
     person(given = "Daniela", family = "Cassol", role = c("aut", "cre"), email = "danicassol@gmail.com"),
